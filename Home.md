@@ -1,1 +1,0 @@
-Home page for the Personal Catalogue wiki.
