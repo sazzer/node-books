@@ -37,9 +37,13 @@ needle.register('restify')
         return server;
     });
 needle.register('routes')
+    .dependsOn('routes-users')
     .dependsOn('routes-debug');
 needle.register('routes-debug')
     .requires('./routes/debug')
+    .factoryFunction(function(route) { return route; });
+needle.register('routes-users')
+    .requires('./routes/users')
     .factoryFunction(function(route) { return route; });
 
 needle.done().then(function(container) {
