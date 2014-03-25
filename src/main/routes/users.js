@@ -1,4 +1,4 @@
-var User = require("../main/users/user");
+var User = require("../users/user");
 
 module.exports = {
     register: function(server) {

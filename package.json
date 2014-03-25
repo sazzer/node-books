@@ -16,7 +16,7 @@
   },
   "bin": {},
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node src/main/main.js",
     "test": "mocha --reporter spec --recursive src/spec",
     "wiki": "gollum --ref wiki --live-preview"
   },

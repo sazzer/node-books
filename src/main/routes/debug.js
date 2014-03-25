@@ -1,4 +1,4 @@
-var package = require("../../package.json");
+var package = require("../../../package.json");
 
 module.exports = {
     register: function(server) {
