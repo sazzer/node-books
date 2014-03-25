@@ -1,0 +1,27 @@
+{
+  "name": "node-books",
+  "description": "Personal Catalogue",
+  "version": "0.0.1",
+  "author": "Graham Cox <graham@grahamcox.co.uk>",
+  "dependencies": {
+    "q": "~1.0.0",
+    "needle-di": "0.0.1",
+    "restify": "~2.6.3"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "should": "~3.1.2",
+    "mocha-as-promised": "~2.0.0"
+  },
+  "bin": {},
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "mocha --reporter spec --recursive src/spec",
+    "wiki": "gollum --ref wiki --live-preview"
+  },
+  "licenses": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sazzer/node-books.git"
+  }
+}
