@@ -36,6 +36,9 @@ needle.register('restify')
         });
         return server;
     });
+needle.register('users-dao')
+    .requires('./users/dao')
+    .factoryFunction(function(dao) { return dao; });
 needle.register('routes')
     .dependsOn('routes-users')
     .dependsOn('routes-debug');
@@ -44,7 +47,8 @@ needle.register('routes-debug')
     .factoryFunction(function(route) { return route; });
 needle.register('routes-users')
     .requires('./routes/users')
-    .factoryFunction(function(route) { return route; });
+    .dependsOn('users-dao')
+    .factoryFunction(function(route, cfg) { return route.build(cfg); });
 
 needle.done().then(function(container) {
     container.get('restify').then(function(server) {

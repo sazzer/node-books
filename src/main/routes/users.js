@@ -1,17 +1,30 @@
-var User = require("../users/user");
+var restify = require("restify"),
+    User = require("../users/user"),
+    UserErrors = require("../users/errors");
 
 module.exports = {
-    register: function(server) {
-        server.get('/user/:id', function(req, res, next) {
-            var user = User.new();
-            user.userid = 1;
-            user.username = "sazzer";
-            user.fullname = "Graham Cox";
-            user.email = "graham@grahamcox.co.uk";
-            user.active = true;
-            res.send(user);
-            next();
-        });
+    build: function(cfg) {
+        var userDao = cfg['users-dao'];
+
+        return {
+            register: function(server) {
+                server.get('/user/:id', function(req, res, next) {
+                    userDao.findById(req.params.id)
+                        .then(function(user) {
+                            res.json(user);
+                        }, function(err) {
+                            if (err instanceof UserErrors.UnknownUser) {
+                                res.send(new restify.NotFoundError(err.message));
+                            } else {
+                                res.send(new restify.InternalError(err.message));
+                            }
+                        })
+                        .fin(function() {
+                            next();
+                        });
+                });
+            }
+        }
     }
 }
 
