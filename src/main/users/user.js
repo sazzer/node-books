@@ -2,11 +2,33 @@
  * Representation of a User
  */
 var User = function() {
-    this.userid = undefined;
-    this.username = undefined;
-    this.fullname = undefined;
-    this.email = undefined;
-    this.active = false;
+    Object.defineProperties(this, {
+        "userid": {
+            value: undefined,
+            writable: true,
+            enumerable: true
+        },
+        "username": {
+            value: undefined,
+            writable: true,
+            enumerable: true
+        },
+        "fullname": {
+            value: undefined,
+            writable: true,
+            enumerable: true
+        },
+        "email": {
+            value: undefined,
+            writable: true,
+            enumerable: true
+        },
+        "active": {
+            value: undefined,
+            writable: true,
+            enumerable: true
+        }
+    });
 };
 
 module.exports = User;
