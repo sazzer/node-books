@@ -1,32 +1,39 @@
 var User = require("./user"),
     Errors = require("./errors"),
-    Q = require("q"),
-    Base = require("selfish").Base;
+    Q = require("q");
 
 /**
  * DAO for loading User records
  */
-module.exports = Base.extend({
-    /**
-     * Find the user with the given User ID
-     * @param id The ID of the user
-     * @return promise of the user record
-     */
-    findById: function(id) {
-        return Q.fcall(function() {
-            if (id == 1) {
-                var user = User.new();
+var UserDao = function() {
+    this._cache = {};
 
-                user.userid = id;
-                user.username = "sazzer";
-                user.fullname = "Graham Cox";
-                user.email = "graham@grahamcox.co.uk";
-                user.active = true;
+    var user = new User();
 
-                return user;
-            } else {
-                throw new Errors.UnknownUser(id);
-            }
-        });
-    }
-});
+    user.userid = 1;
+    user.username = "sazzer";
+    user.fullname = "Graham Cox";
+    user.email = "graham@grahamcox.co.uk";
+    user.active = true;
+
+    this._cache[user.userid] = user;
+};
+
+/**
+ * Find the user with the given User ID
+ * @param id The ID of the user
+ * @return promise of the user record
+ */
+UserDao.prototype.findById = function(id) {
+    return Q.fcall(function() {
+        var user = this._cache[id];
+
+        if (user) {
+            return user;
+        } else {
+            throw new Errors.UnknownUser(id);
+        }
+    }.bind(this));
+}
+
+module.exports = UserDao;

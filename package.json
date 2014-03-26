@@ -6,7 +6,6 @@
   "dependencies": {
     "q": "~1.0.0",
     "needle-di": "0.0.1",
-    "selfish": "~0.3.2",
     "restify": "~2.6.3"
   },
   "devDependencies": {

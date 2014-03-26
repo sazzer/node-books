@@ -38,7 +38,7 @@ needle.register('restify')
     });
 needle.register('users-dao')
     .requires('./users/dao')
-    .factoryFunction(function(dao) { return dao; });
+    .factoryFunction(function(UserDao) { return new UserDao(); });
 needle.register('routes')
     .dependsOn('routes-users')
     .dependsOn('routes-debug');
